@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather App</title>
+<style>
+body {
+    background-color: lightblue;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+input[type="text"], button {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.weather-icon {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Weather App</h1>
+    <input type="text" id="cityInput" placeholder="Enter city name">
+    <button onclick="getWeather()">Get Weather</button>
+    <div id="weatherInfo"></div>
+    <div id="weatherIcon"></div>
+</div>
+<script>
+async function getWeather() {
+    const city = document.getElementById('cityInput').value;
+    let temperature = 0;
+    let icon = '';
+
+    // Check for specific temperature values and set icon
+    const temperatureValues = [45, 20, 35, 45];
+    if (temperatureValues.includes(parseInt(city))) {
+        temperature = city;
+    } else {
+        const randomIndex = Math.floor(Math.random() * temperatureValues.length);
+        temperature = temperatureValues[randomIndex];
+    }
+
+    // Set icon based on temperature
+    if (temperature > 30) {
+        icon = '☀️'; // sunny icon
+    } else if (temperature <= 10) {
+        icon = '☁️'; // cloudy icon
+    } else {
+        icon = '🌧️'; // rainy icon
+    }
+
+    document.getElementById('weatherInfo').innerHTML = `Temperature in ${city}: ${temperature}°C`;
+    document.getElementById('weatherIcon').innerHTML = icon;
+}
+</script>
+</body>
+</html>
